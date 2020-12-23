@@ -21,7 +21,7 @@ class Duck(Animal):
     # This is a constructor! It's called when an object of this class
     # is created. The 'self' variable is always the first input parameter
     # and is used to create instance variables and call methods.
-    def __init__(self, name):
+    def __init__(self, name, num1, num2):
 
         Duck.num_ducks_created = Duck.num_ducks_created + 1
 
@@ -41,20 +41,29 @@ class Duck(Animal):
         # The instance variable can be used throughout the class
         print(self.name + ' the Duck was created!')
 
+    def add(self):
+        print(Duck.num1 + Duck.num2)
+
+    def multiply(self):
+        print(Duck.num1 * Duck.num2)
 
 if __name__ == '__main__':
     # 1. Create an object of the Duck class
     # kenny = Duck('Kenny')
-
+    kenny = Duck("Kenny", 1, 2)
     # 2. Add 2 more input variables into the Duck constructor
 
     # 2. Create 2 instance variables in the Duck class
 
     # 3. Create 2 more methods in the Duck class,
+
     # for example quack or waddle
 
     # 4. Create 2 more Ducks with different names and call the methods
     # created in the previous step
+    michael = Duck("Michael", 3, 5)
+    jake = Duck("Jake", 7, 9)
+
 
     if Duck.num_ducks_created < 3:
         print('There are only ' + str(Duck.num_ducks_created) + ' Ducks.')
