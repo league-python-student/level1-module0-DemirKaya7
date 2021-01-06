@@ -25,15 +25,17 @@ class MyFirstPythonApp(tk.Tk):
         # Use a tk.StringVar() variable if you want to update text on a label
         self.label_text = tk.StringVar()
         self.label_text.set("Welcome!!!")
+        self.label2_text = tk.StringVar()
+        self.label2_text.set("My first app :)")
 
         # Add a text label. Notice 'textvariable=' is used, not 'text=' because
         # we want to update the text on the label
         label = tk.Label(self, textvariable=self.label_text, bg='yellow', fg='blue', font=('arial', 32, 'bold'), relief='solid')
-
+        label2 = tk.Label(self, textvariable=self.label2_text, bg='red', fg='green', font=('arial', 16, 'normal'), relief='solid')
         # You can set the location of the label relative to the size of the window
         # The scaling will be maintained if the the app window is resized
         label.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.1)
-
+        label2.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.1)
         # Add an image
         img = create_image('python.png', 200, 200)
         label_image = tk.Label(self, image=img)
@@ -45,18 +47,25 @@ class MyFirstPythonApp(tk.Tk):
         # Add a button.
         # command=lambda: self.on_button_press() tells the program to call the
         # on_button_press() method when the button is clicked
-        button = tk.Button(self, text='Press Me!', bg='green', fg='black', command=lambda: self.on_button_press())
+        button = tk.Button(self, text='Press Me!', bg='green', fg='black', command=lambda: self.on_button1_press())
         button.place(x=200, y=450)
+        button2 = tk.Button(self, text='Hello', bg='black', fg='white', command=lambda: self.on_button2_press())
+        button2.place(x=215, y=420)
 
         # Add a text field
         self.text_field = tk.Entry(self)
         self.text_field.place(relx=0.2, rely=0.8, relwidth=0.5, height=18)
+        self.text_field2 = tk.Entry(self)
+        self.text_field2.place(relx=0.2, rely=0.35, relwidth=0.5, height=18)
 
-    def on_button_press(self):
+    def on_button1_press(self):
         text_in_text_field = self.text_field.get()
-
         # Update the text in the label
         self.label_text.set(text_in_text_field)
+
+    def on_button2_press(self):
+        text_in_text_field2 = self.text_field2.get()
+        self.label2_text.set(text_in_text_field2)
 
 
 if __name__ == '__main__':
