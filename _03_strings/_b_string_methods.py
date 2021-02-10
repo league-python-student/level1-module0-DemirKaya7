@@ -12,7 +12,7 @@ def find_longer_string(s1, s2):
 
 # If String s contains the word "underscores", change all of the spaces to underscores
 def format_spaces(s1):
-    if s1.count('underscores') > 0:
+    if s1.count('underscore') > 0:
         return s1.replace(' ','_')
     else:
         return s1
@@ -27,6 +27,9 @@ def format_spaces(s1):
 # "abc" < "abd"   # True
 # "abc" < "abD"   # False
 def line_leader(s1, s2, s3):
+    s1 = s1.strip()
+    s2 = s2.strip()
+    s3 = s3.strip()
     space_s1 = s1.find(' ')
     space_s2 = s2.find(' ')
     space_s3 = s3.find(' ')
@@ -42,14 +45,13 @@ def line_leader(s1, s2, s3):
     else:
         print("error - no if statments ran")
 
-        #SOMETHING ABOUT "L STRIP / R STRIP" FUNCTION? <<-- note to self
 
 
 # Return the sum of all numerical digits in the String
 def numeral_sum(s):
     current_sum = 0
     for i in range(len(s)):
-        if str(s[i].isdigit()):
+        if (s[i].isdigit()):
             current_sum = current_sum + int(s[i])
     return current_sum
 
@@ -57,16 +59,14 @@ def numeral_sum(s):
 
 # Return the number of times String substring appears in String s
 def substring_count(s, substring):
-    return('\'o\' occurs ' + s.count(substring))
+    return (s.count(substring))
 
 
-# Return the number of words in Strings that end with String substring
+# Return the number of words in String s that end with String substring
 # You can assume there are no punctuation marks between words
 def words_ends_with_substring(s, substring):
-    num_words = s.count(" ")
-    for i in range (num_words):
-        num_substring = s.count(substring) + num_substring
-    return num_substring
+    num_substrings = s.count(substring + " ")
+    return num_substrings
 
 
 
@@ -75,12 +75,11 @@ def words_ends_with_substring(s, substring):
 # You can assume that substring will appear at least twice
 def distance(s, substring):
     numOccurances = s.count(substring)
-    lengthOfSubstring = len(substring)
-    firstAppearance = s.find(substring)
-    if firstAppearance == 0:
-        firstAppearance = 1
-    lastAppearance = s.find(substring, (lengthOfSubstring * (numOccurances - 1)))
-    return (lastAppearance - (firstAppearance * lengthOfSubstring))
+    firstIndex = s.find(substring) + len(substring)
+    finalIndex = -1
+    for i in range(numOccurances):
+        finalIndex = s.find(substring, finalIndex + 1)
+    return (finalIndex - firstIndex)
 
 
 
@@ -97,6 +96,7 @@ def palindrome(s):
     s = s.replace('\'', '')
     s = s.replace('(', '')
     s = s.replace(')', '')
+    s = s.replace(':','')
     s = s.upper()
     char1 = 0
     char2 = len(s) - 1

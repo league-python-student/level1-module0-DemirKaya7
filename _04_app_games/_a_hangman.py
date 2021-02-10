@@ -78,11 +78,13 @@ class Hangman(tk.Tk):
 if __name__ == '__main__':
     # 1. Delete 'pass' and make a new Hangman game, example
     # game = Hangman(None)
-    pass
+    game = Hangman(None)
 
     # 2. Set your game title
-
+    game.title("HANGMAN")
     # 3. Add a key listener to your game
     # game.bind("<Key>", game.key_pressed)
+    game.bind("<Key>", game.key_pressed)
 
     # 4. Run your game's mainloop()
+    game.mainloop()
