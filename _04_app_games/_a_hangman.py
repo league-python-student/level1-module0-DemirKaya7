@@ -13,6 +13,7 @@ class Hangman(tk.Tk):
         self.random_word = None
 
         # 5. Make a new instance variable to hold the word being guessed
+        self.word = None
 
         self.initialize()
 
@@ -28,13 +29,18 @@ class Hangman(tk.Tk):
 
         self.setup_new_word()
 
+        self.wordUnderscores = ""
+
     def setup_new_word(self):
         # 6. Create an string of underscores that's the same length of the random word
 
+        for i in range(len(self.random_word)):
+            self.wordUnderscores = self.wordUnderscores + "_"
         # 7. Set the string of underscores using entered_text.set()
+        self.entered_text.set(wordUnderscores)
 
         # 8. Delete 'pass'
-        pass
+
 
     def key_pressed(self, event):
         key = str(event.char)
@@ -43,9 +49,15 @@ class Hangman(tk.Tk):
         # 9. Check if the key that was pressed is within the guess string
         # You can change a string into a list by doing: my_list = list(my_string)
         # You can change a list into a string by doing: my_string = ''.join(my_list)
+        print(self.random_word)
+        if key in self.random_word:
+            for i in range(len(self.random_word)):
+                self.entered_text.set(self.wordUnderscores.replace("_", key))
 
         # 10. If the guess string matches the random word,
         # Print a message/pop-up telling the user they won!
+        if self.random_word == self.word:
+            print("You win")
 
     # --------------------------- DO NOT EDIT this method ---------------------
     @staticmethod
