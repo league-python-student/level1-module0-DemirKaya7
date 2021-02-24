@@ -21,42 +21,55 @@ class Hangman(tk.Tk):
         # Get Random word from dictionary
         Hangman.read_words_file()
         self.random_word = Hangman.get_random_word()
-        print(self.random_word)
 
         # Setup label to display keys pressed by the user
         self.label = tk.Label(self, bg='light grey', textvariable=self.entered_text)
         self.label.place(relwidth=1, relheight=1)
 
+        self.wordUnderscores = ""
+
+        self.lives = 10
+
         self.setup_new_word()
 
-        self.wordUnderscores = ""
 
     def setup_new_word(self):
         # 6. Create an string of underscores that's the same length of the random word
-
         for i in range(len(self.random_word)):
             self.wordUnderscores = self.wordUnderscores + "_"
         # 7. Set the string of underscores using entered_text.set()
-        self.entered_text.set(wordUnderscores)
+        self.entered_text.set(self.wordUnderscores)
 
         # 8. Delete 'pass'
+        print("Lives : " + str(self.lives))
+        print(self.random_word)
 
 
     def key_pressed(self, event):
         key = str(event.char)
-        print("pressed " + key)
-
         # 9. Check if the key that was pressed is within the guess string
         # You can change a string into a list by doing: my_list = list(my_string)
         # You can change a list into a string by doing: my_string = ''.join(my_list)
-        print(self.random_word)
-        if key in self.random_word:
-            for i in range(len(self.random_word)):
-                self.entered_text.set(self.wordUnderscores.replace("_", key))
+        if self.lives > 1:
+            index = 0
+            if key in self.random_word:
+                for i in range(self.random_word.count(key)):
+                    index = self.random_word.find(key, index)
+                    index = index + 1
+                    wordList = list(self.wordUnderscores)
+                    wordList[index - 1] = key
+                    self.wordUnderscores = ''.join(wordList)
+                    self.entered_text.set(self.wordUnderscores)
+                print("Lives : " + str(self.lives))
+            else:
+                self.lives = self.lives - 1
+                print("Lives : " + str(self.lives))
+        else:
+            print("Game over")
 
         # 10. If the guess string matches the random word,
         # Print a message/pop-up telling the user they won!
-        if self.random_word == self.word:
+        if self.random_word == self.wordUnderscores:
             print("You win")
 
     # --------------------------- DO NOT EDIT this method ---------------------
